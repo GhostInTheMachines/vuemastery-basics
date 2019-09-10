@@ -32,6 +32,7 @@ var app = new Vue({
         sizeId: 03,
         mySize: "L"
       }
-    ]
+    ],
+    cart: 0
   }
 });
