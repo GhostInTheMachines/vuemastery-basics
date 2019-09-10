@@ -24,12 +24,18 @@
             <li v-for="detail in details">{{ detail }}</li>
           </ul>
           <h2>Variants</h2>
-          <div v-for="variant in variants" :key="variant.variantId">
-            <p @mouseover="updateProduct(variant.variantImage)">
-              {{ variant.variantColor }}
-            </p>
+          <div>
+            <ul id="color-list">
+              <li
+                v-for="variant in variants"
+                :key="variant.variantId"
+                @mouseover="updateProduct(variant.variantImage)"
+              >
+                {{ variant.variantColor }}
+              </li>
+            </ul>
           </div>
-          <div class="horizontal-list">
+          <div>
             <h2>Sizes</h2>
             <ul id="size-list">
               <li v-for="(size, sizeId) in sizes" :key="sizeId">
@@ -40,6 +46,7 @@
           <div class="cart">
             <p>Cart({{ cart }})</p>
             <button v-on:click="addToCart">Add to cart</button>
+            <button v-on:click="removeFromCart">Remove</button>
           </div>
         </div>
       </div>
