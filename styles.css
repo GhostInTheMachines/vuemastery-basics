@@ -92,7 +92,7 @@ ul#size-list li {
   display: inline;
   padding: 15px;
 }
-ul#color-list li {
-  display: inline;
-  padding: 5px;
+
+.textDecoration {
+  text-decoration: line-through;
 }
