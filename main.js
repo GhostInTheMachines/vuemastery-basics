@@ -1,5 +1,11 @@
 // Product component
 Vue.component("product", {
+  props: {
+    premium: {
+      type: Boolean,
+      required: true
+    }
+  },
   template: `
     <div class="product">
     <div class="product-image">
@@ -46,6 +52,8 @@ Vue.component("product", {
       >
         Remove
       </button>
+      <p>User is premium: {{ premium }} </p>
+      <p>Shipping: {{ shipping }}</p>
     </div>
   </div>
     `,
@@ -112,10 +120,20 @@ Vue.component("product", {
     },
     isOnSale() {
       if (this.onSale) return this.product + " are on Sale, and ";
+    },
+    shipping() {
+      if (this.premium) {
+        return "Free";
+      } else {
+        return 2.99;
+      }
     }
   }
 });
 // Root Vue instance
 var app = new Vue({
-  el: "#app"
+  el: "#app",
+  data: {
+    premium: true
+  }
 });
