@@ -35,9 +35,6 @@ Vue.component("product", {
           </li>
         </ul>
       </div>
-      <div class="cart">
-        <p>Cart({{ cart }})</p>
-      </div>
       <button
         v-on:click="addToCart"
         :disabled="!inStock"
@@ -47,8 +44,6 @@ Vue.component("product", {
       </button>
       <button
         v-on:click="removeFromCart"
-        :disabled="!inStock"
-        :class="{ disabledButton: !inStock }"
       >
         Remove
       </button>
@@ -77,7 +72,7 @@ Vue.component("product", {
           variantId: 2235,
           variantColor: "blue",
           variantImage: "./assets/vmSocks-blue.jpg",
-          variantQuantity: 0
+          variantQuantity: 1
         }
       ],
       sizes: [
@@ -93,17 +88,17 @@ Vue.component("product", {
           sizeId: 03,
           mySize: "L"
         }
-      ],
-      cart: 0
+      ]
     };
   },
   methods: {
     addToCart() {
-      this.cart += 1;
+      this.$emit("add-to-cart", this.variants[this.selectedVariant]);
     },
-    removeFromCart() {
-      if (this.cart > 0) this.cart -= 1;
-    },
+    // removeFromCart() {
+    //   if (this.$emit("remove-from-cart", this.variants[this.selectedVariant]))
+    //     this.$emit("remove-from-cart", this.variants[this.selectedVariant]);
+    // },
     updateProduct(index) {
       this.selectedVariant = index;
     }
@@ -134,6 +129,19 @@ Vue.component("product", {
 var app = new Vue({
   el: "#app",
   data: {
-    premium: true
+    premium: true,
+    cart: []
+  },
+  methods: {
+    updateCart(obj) {
+      obj.variantQuantity -= 1;
+      this.cart.push(obj.id);
+    },
+    removeFromCart(obj) {
+      if (obj) {
+        this.obj.variantQuantity += 1;
+        this.cart.pop(obj);
+      }
+    }
   }
 });
